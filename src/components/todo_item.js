@@ -2,9 +2,11 @@ export default function TodoItem({ todo }) {
   const { text, isCompleted } = todo;
   let color = "light";
   let bi = "square";
+  let textDecoration = "";
   if (isCompleted) {
     color = "success";
     bi = "check-square";
+    textDecoration = "text-decoration-line-through";
   }
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -12,7 +14,7 @@ export default function TodoItem({ todo }) {
         <button class={"btn btn-sm btn-" + color}>
           <i class={"bi bi-" + bi}></i>
         </button>
-        <span class="ms-2 text-decoration-line-through">{text}</span>
+        <span class={"ms-2 " + textDecoration}>{text}</span>
       </div>
       <div>
         <button class="btn btn-sm btn-danger">
