@@ -1,9 +1,9 @@
 export default function TodoItem(props) {
-  const { task, isCompleted, id, onDelete, onMarking } = props;
+  const { task, isComplete, id, onDelete, onMarking } = props;
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
       <div>
-        {!isCompleted ? (
+        {!isComplete ? (
           <>
             <button
               className="btn btn-sm btn-light"
