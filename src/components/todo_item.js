@@ -1,24 +1,33 @@
-export default function TodoItem({ todo }) {
-  const { text, isCompleted } = todo;
-  let color = "light";
-  let bi = "square";
-  let textDecoration = "";
-  if (isCompleted) {
-    color = "success";
-    bi = "check-square";
-    textDecoration = "text-decoration-line-through";
-  }
+export default function TodoItem(props) {
+  const { task, isCompleted, id, onDelete, onMarking } = props;
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
       <div>
-        <button class={"btn btn-sm btn-" + color}>
-          <i class={"bi bi-" + bi}></i>
-        </button>
-        <span class={"ms-2 " + textDecoration}>{text}</span>
+        {!isCompleted ? (
+          <>
+            <button
+              className="btn btn-sm btn-light"
+              onClick={() => onMarking(id)}
+            >
+              <i className="bi bi-square"></i>
+            </button>
+            <span className="ms-2">{task}</span>
+          </>
+        ) : (
+          <>
+            <button
+              className="btn btn-sm btn-success"
+              onClick={() => onMarking(id)}
+            >
+              <i className="bi bi-check-square"></i>
+            </button>
+            <span className="ms-2 text-decoration-line-through">{task}</span>
+          </>
+        )}
       </div>
       <div>
-        <button class="btn btn-sm btn-danger">
-          <i class="bi bi-trash"></i>
+        <button className="btn btn-sm btn-danger" onClick={() => onDelete(id)}>
+          <i className="bi bi-trash"></i>
         </button>
       </div>
     </li>

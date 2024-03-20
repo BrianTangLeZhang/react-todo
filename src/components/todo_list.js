@@ -1,16 +1,29 @@
 import TodoItem from "./todo_item";
 
-export default function TodoList() {
-  const Todos = [
-    { id: 1, text: "Task 1", isCompleted: true },
-    { id: 2, text: "Task 2", isCompleted: false },
-    { id: 3, text: "Task 3", isCompleted: false },
-  ];
+export default function TodoList(props) {
+  const { todos, setTodos } = props;
+  const updateHandler = (id) => {
+    const newTodo = todos.find((t) => t.id === id);
+    newTodo.isCompleted = !newTodo.isCompleted;
+    const newTodos = todos.filter((t) => t.id !== id);
+    setTodos([newTodo, ...newTodos]);
+  };
+
   return (
     <ul className="list-group">
-      {Todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      {todos.map((todo) => {
+        const { id, task, isCompleted } = todo;
+        return (
+          <TodoItem
+            key={id}
+            id={id}
+            task={task}
+            isCompleted={isCompleted}
+            onDelete={(id) => setTodos(todos.filter((t) => t.id !== id))}
+            onMarking={(id) => updateHandler(id)}
+          />
+        );
+      })}
     </ul>
   );
 }
